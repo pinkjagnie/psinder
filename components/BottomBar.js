@@ -3,14 +3,14 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 
 import { FontAwesome } from "@expo/vector-icons";
 
-const BottomBar = () => {
+const BottomBar = ({ likePressHandler, passPressHandler }) => {
   return(
     <View style={styles.container}>
       <View />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={passPressHandler}>
         <FontAwesome name="times" size={27} color="#F06795"></FontAwesome>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={likePressHandler}>
         <FontAwesome name="heart" size={27} color="#64EDCC"></FontAwesome>
       </TouchableOpacity>
       <View />

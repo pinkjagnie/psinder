@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
 import Constants from 'expo-constants';
 
@@ -11,6 +11,8 @@ import Swipes from './components/Swipes';
 export default function App() {
   const [users, setUsers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const swipesRef = useRef(null);
 
   const fetchUsers = async () => {
     try {
@@ -42,6 +44,13 @@ export default function App() {
     setCurrentIndex(nextIndex);
   };
 
+  const likePressHandler = () => {
+    swipesRef.current.openLeft()
+  };
+
+  const passPressHandler = () => {
+    swipesRef.current.openRight()
+  };
 
   return (
     <View style={styles.container}>
@@ -53,7 +62,7 @@ export default function App() {
               currentIndex === index && (
                 <Swipes
                   key={index}
-                  // ref={swipesRef}
+                  ref={swipesRef}
                   currentIndex={currentIndex}
                   users={users}
                   likeHandler={likeHandler}
@@ -62,7 +71,7 @@ export default function App() {
               )
           )}
       </View>
-      <BottomBar />
+      <BottomBar likePressHandler={likePressHandler} passPressHandler={passPressHandler} />
     </View>
   );
 }
